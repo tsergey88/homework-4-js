@@ -65,3 +65,15 @@ function countDown(num) {
 }
 
 countDown(20);
+
+// 5) Write a polyfill for a .bind()
+var Mybind = function(fn, context) {
+    // обрезаем ненужные аргументы (функцию и контекст)
+    var bindArgs = [].slice.call(arguments, 2);
+    return function() {
+        // здесь все аргументы будут необходимы
+        var fnArgs = [].slice.call(arguments);
+        // собираем все 
+        return fn.apply(context, bindArgs.concat(fnArgs));
+    };
+};
